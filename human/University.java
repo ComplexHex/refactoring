@@ -1,7 +1,9 @@
 package com.javarush.task.task29.task2909.human;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class University {
     private String name;
@@ -37,4 +39,31 @@ public class University {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public Student getStudentWithAverageGrade(double averageGrade) {
+        List<Student> averageList = new ArrayList<>();
+
+        for (Student student : getStudents()) {
+            if ((student.getAverageGrade() == averageGrade)) {
+                averageList.add(student);
+            }
+
+        }
+        return averageList.get(0);
+    }
+
+    public Student getStudentWithMaxAverageGrade() {
+
+        return students.stream().max(Comparator.comparing(Student::getAverageGrade)).get();
+    }
+
+    public Student getStudentWithMinAverageGrade() {
+        return students.stream().min(Comparator.comparing(Student::getAverageGrade)).get();
+    }
+
+    public void expel(Student student) {
+        students.remove(student);
+    }
+
+
 }
