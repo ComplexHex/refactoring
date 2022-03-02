@@ -13,14 +13,29 @@ public class Car {
     public double winterFuelConsumption;
     public double winterWarmingUp;
 
-    private int type;
 
     private boolean driverAvailable;
     private int numberOfPassengers;
+    private int type;
 
-    public Car(int type, int numberOfPassengers) {
-        this.type = type;
+    public static Car create(int type, int numberOfPassengers) {
+        switch (type) {
+            case (TRUCK):
+                return new Truck(numberOfPassengers);
+            case (SEDAN):
+                return new Sedan( numberOfPassengers);
+            case (CABRIOLET):
+                return new Cabriolet(numberOfPassengers);
+            default:
+                return null;
+        }
+
+
+    }
+
+    protected Car(int type, int numberOfPassengers) {
         this.numberOfPassengers = numberOfPassengers;
+        this.type = type;
     }
 
     public int fill(double numberOfLiters) {
@@ -72,11 +87,11 @@ public class Car {
     public void fastenDriverBelt() {
     }
 
-    public int getMaxSpeed() {
-        if (type == TRUCK)
-            return 80;
-        if (type == SEDAN)
-            return 120;
-        return 90;
-    }
+//    public int getMaxSpeed() {
+//        if (type == TRUCK)
+//            return 80;
+//        if (type == SEDAN)
+//            return 120;
+//        return 90;
+//    }
 }
